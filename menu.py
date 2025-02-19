@@ -2,40 +2,44 @@ import tkinter as tk
 from euler import VentanaEuler
 from newton import VentanaNewton
 from runge import VentanaRunge
+
 class Menu:
     def __init__(self):
         self.root = tk.Tk()
         self.root.title("Menú Principal")
+        self.root.geometry("450x500")  
+        self.root.configure(bg="#1E1E1E") 
 
-    def mostrar_opciones(self):
-        # Título del menú
-        label = tk.Label(self.root, text="Menú Principal", font=("Arial", 20))
+        label = tk.Label(self.root, text="Menú de Métodos Numéricos", font=("Arial", 18, "bold"), 
+                         bg="#1E1E1E", fg="#A97DFF")  # Texto en morado claro
         label.pack(pady=20)
 
-        # Euler Mejorado
-        btn_opcion1 = tk.Button(self.root, text="Euler Mejorado", width=20, command=self.abrir_euler_mejorado)
-        btn_opcion1.pack(pady=10)
+        self.crear_boton("Euler Mejorado", self.abrir_euler_mejorado, "#6A0DAD", "#A97DFF")
+        self.crear_boton("Runge Kutta", self.abrir_runge_kulta, "#6A0DAD", "#A97DFF")
+        self.crear_boton("Newton Raphson", self.abrir_newton_raphson, "#6A0DAD", "#A97DFF")
 
-        # Runge Kulta
-        btn_opcion2 = tk.Button(self.root,text="Runge Kulta", width=20,command=self.abrir_runge_kulta)
-        btn_opcion2.pack(pady=10)
-
-        # Runge Newton Raphson
-        btn_opcion3 = tk.Button(self.root,text="Newton Raphson", width=20,command=self.abrir_newton_raphson)
-        btn_opcion3.pack(pady=10)
+    def crear_boton(self, texto, comando, color_base, color_hover):
+        btn = tk.Button(self.root, text=texto, font=("Arial", 14, "bold"), bg=color_base, fg="black",
+                        activebackground=color_hover, activeforeground="black", bd=0, padx=10, pady=10,
+                        width=25, relief="flat", cursor="hand2", borderwidth=5)
+        btn.pack(pady=12)
+        btn.bind("<Enter>", lambda e: btn.config(bg=color_hover))  # Efecto hover
+        btn.bind("<Leave>", lambda e: btn.config(bg=color_base))  # Regresar color base
+        btn.config(command=comando)
 
     def abrir_euler_mejorado(self):      
         self.root.destroy()                  
-        ventana1 = VentanaEuler()
+        VentanaEuler()
 
     def abrir_runge_kulta(self):
         self.root.destroy()
-        ventana2 =VentanaRunge()
+        VentanaRunge()
 
     def abrir_newton_raphson(self):
         self.root.destroy()
-        ventana3 =VentanaNewton()
+        VentanaNewton()
 
     def run(self):
-        self.mostrar_opciones()
         self.root.mainloop()
+
+

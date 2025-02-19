@@ -1,0 +1,28 @@
+# Archivos de compilación de Python
+__pycache__/
+*.py[cod]
+*.so
+.venv
+
+# Archivos de entorno virtual
+venv/
+env/
+*.env
+
+# Archivos de logs y depuración
+*.log
+*.out
+*.err
+
+# Configuración de IDEs y editores
+.vscode/
+.idea/
+*.iml
+
+# Dependencias instaladas
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Archivos de caché y temporales
+*.sqlite3
+.DS_Store
