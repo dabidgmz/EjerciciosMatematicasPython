@@ -2,46 +2,46 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 from metodos import Metodos
 
-class VentanaEuler:
+class Euler:
     def __init__(self):
         self.root = tk.Tk()
-        self.root.title("Método de Euler Mejorado")
+        self.root.title("Euler Mejorado")
         self.root.geometry("750x450") 
         self.root.resizable(False, False)
 
-        self.color_fondo = "#2E2E2E"  
-        self.color_texto = "#FFFFFF"  
-        self.color_boton = "#6A1B9A" 
-        self.color_boton_texto = "#2E2E2E"  
+        self.color_fondo = "#000000"  
+        self.color_texto = "#800080"  
+        self.color_boton_calcular = "#00FF00" 
+        self.color_boton_limpiar = "#FF0000"  
+        self.color_boton_texto = "#000000"  
         self.color_entrada = "#424242"  
         self.color_entrada_texto = "#FFFFFF" 
 
         self.root.configure(bg=self.color_fondo)
 
-        self.frame_entrada = tk.LabelFrame(self.root, text="Parámetros de Entrada", padx=10, pady=10, bg=self.color_fondo, fg=self.color_texto)
-        self.frame_entrada.pack(padx=10, pady=5, fill="x")
+        self.frame_entrada = tk.Frame(self.root, bg=self.color_fondo)
+        self.frame_entrada.pack(pady=10)
 
+        self.frame_entrada = tk.LabelFrame(self.root, text="Insertar datos ", padx=10, pady=10, bg=self.color_fondo, fg=self.color_texto)
+        self.frame_entrada.pack(padx=10, pady=5, fill="x")
         labels = ["x0:", "y0:", "h:", "xf:", "f(x, y):"]
         self.entries = {}
 
         for i, label in enumerate(labels):
-            tk.Label(self.frame_entrada, text=label, font=("Arial", 10), bg=self.color_fondo, fg=self.color_texto).grid(row=i, column=0, sticky="w", pady=3)
-            entry = tk.Entry(self.frame_entrada, font=("Arial", 10), width=15, bg=self.color_entrada, fg=self.color_entrada_texto, insertbackground=self.color_texto)
-            entry.grid(row=i, column=1, pady=3, padx=5)
+            tk.Label(self.frame_entrada, text=label, font=("Arial", 10), bg=self.color_fondo, fg=self.color_texto).pack(side="left", padx=5)
+            entry = tk.Entry(self.frame_entrada, font=("Arial", 10), width=10, bg=self.color_entrada, fg=self.color_entrada_texto, insertbackground=self.color_texto)
+            entry.pack(side="left", padx=5)
             self.entries[label] = entry
 
-        
-        self.boton_calcular = tk.Button(self.frame_entrada, text="Calcular", font=("Arial", 10, "bold"), bg=self.color_boton, fg=self.color_boton_texto, command=self.calcular)
-        self.boton_calcular.grid(row=len(labels), column=0, columnspan=2, pady=10, padx=5, sticky="ew")
+        self.boton_calcular = tk.Button(self.root, text="=", font=("Arial", 10, "bold"), bg=self.color_boton_calcular, fg=self.color_boton_texto, command=self.calcular)
+        self.boton_calcular.pack(pady=5)
 
-        
-        self.boton_limpiar = tk.Button(self.frame_entrada, text="Limpiar", font=("Arial", 10, "bold"), bg="#D32F2F", fg=self.color_boton_texto, command=self.limpiar_entradas)
-        self.boton_limpiar.grid(row=len(labels), column=2, columnspan=1, pady=10, padx=5, sticky="ew")
+        self.boton_limpiar = tk.Button(self.root, text="Clean", font=("Arial", 10, "bold"), bg=self.color_boton_limpiar, fg=self.color_boton_texto, command=self.limpiar_entradas)
+        self.boton_limpiar.pack(pady=5)
 
         self.frame_resultados = tk.LabelFrame(self.root, text="Resultados", padx=10, pady=10, bg=self.color_fondo, fg=self.color_texto)
         self.frame_resultados.pack(padx=10, pady=5, fill="both", expand=True)
 
-       
         self.tabla_frame = tk.Frame(self.frame_resultados, bg=self.color_fondo)
         self.tabla_frame.pack(fill="both", expand=True)
 
@@ -93,6 +93,7 @@ class VentanaEuler:
             entry.delete(0, tk.END)
 
         for row in self.tabla_resultados.get_children():
-                self.tabla_resultados.delete(row)
+            self.tabla_resultados.delete(row)
         
         self.entries["x0:"].focus()
+
