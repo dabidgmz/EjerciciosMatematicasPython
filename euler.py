@@ -6,57 +6,61 @@ class VentanaEuler:
     def __init__(self):
         self.root = tk.Tk()
         self.root.title("Método de Euler Mejorado")
-        self.root.geometry("750x450")  # Ajustamos el tamaño inicial
+        self.root.geometry("750x450") 
         self.root.resizable(False, False)
 
-        # ============ MARCO DE ENTRADA ============
-        self.frame_entrada = tk.LabelFrame(self.root, text="Parámetros de Entrada", padx=10, pady=10)
+        self.color_fondo = "#2E2E2E"  
+        self.color_texto = "#FFFFFF"  
+        self.color_boton = "#6A1B9A" 
+        self.color_boton_texto = "#2E2E2E"  
+        self.color_entrada = "#424242"  
+        self.color_entrada_texto = "#FFFFFF" 
+
+        self.root.configure(bg=self.color_fondo)
+
+        self.frame_entrada = tk.LabelFrame(self.root, text="Parámetros de Entrada", padx=10, pady=10, bg=self.color_fondo, fg=self.color_texto)
         self.frame_entrada.pack(padx=10, pady=5, fill="x")
 
         labels = ["x0:", "y0:", "h:", "xf:", "f(x, y):"]
         self.entries = {}
 
         for i, label in enumerate(labels):
-            tk.Label(self.frame_entrada, text=label, font=("Arial", 10)).grid(row=i, column=0, sticky="w", pady=3)
-            entry = tk.Entry(self.frame_entrada, font=("Arial", 10), width=15)
+            tk.Label(self.frame_entrada, text=label, font=("Arial", 10), bg=self.color_fondo, fg=self.color_texto).grid(row=i, column=0, sticky="w", pady=3)
+            entry = tk.Entry(self.frame_entrada, font=("Arial", 10), width=15, bg=self.color_entrada, fg=self.color_entrada_texto, insertbackground=self.color_texto)
             entry.grid(row=i, column=1, pady=3, padx=5)
             self.entries[label] = entry
 
-        # Botón para calcular
-        self.boton_calcular = tk.Button(self.frame_entrada, text="Calcular", font=("Arial", 10, "bold"), bg="#4CAF50", fg="white", command=self.calcular)
-        self.boton_calcular.grid(row=len(labels), column=0, columnspan=2, pady=10)
+        
+        self.boton_calcular = tk.Button(self.frame_entrada, text="Calcular", font=("Arial", 10, "bold"), bg=self.color_boton, fg=self.color_boton_texto, command=self.calcular)
+        self.boton_calcular.grid(row=len(labels), column=0, columnspan=2, pady=10, padx=5, sticky="ew")
 
-        #Botón para limpiar
-        self.boton_limpiar = tk.Button(self.frame_entrada, text="Limpiar",font=("Aria",10,"bold"),bg="#FF0000" ,fg="white", command=self.limpiar_entradas)
-        self.boton_limpiar.grid(row=len(labels), column=2, columnspan=1, pady=10)
+        
+        self.boton_limpiar = tk.Button(self.frame_entrada, text="Limpiar", font=("Arial", 10, "bold"), bg="#D32F2F", fg=self.color_boton_texto, command=self.limpiar_entradas)
+        self.boton_limpiar.grid(row=len(labels), column=2, columnspan=1, pady=10, padx=5, sticky="ew")
 
-        # ============ MARCO DE RESULTADOS ============
-        self.frame_resultados = tk.LabelFrame(self.root, text="Resultados", padx=10, pady=10)
+        self.frame_resultados = tk.LabelFrame(self.root, text="Resultados", padx=10, pady=10, bg=self.color_fondo, fg=self.color_texto)
         self.frame_resultados.pack(padx=10, pady=5, fill="both", expand=True)
 
-        # Tabla con Scrollbar
-        self.tabla_frame = tk.Frame(self.frame_resultados)
+       
+        self.tabla_frame = tk.Frame(self.frame_resultados, bg=self.color_fondo)
         self.tabla_frame.pack(fill="both", expand=True)
 
         self.tabla_resultados = ttk.Treeview(self.tabla_frame, columns=("n", "Xn", "Yn", "(Yn+1)*", "Xn+1", "Yn+1"), show="headings", height=8)
 
-        # Encabezados con mejor alineación y tamaño
         for col in self.tabla_resultados["columns"]:
             self.tabla_resultados.heading(col, text=col)
             self.tabla_resultados.column(col, anchor="w", width=85)
 
         self.tabla_resultados.pack(side="left", fill="both", expand=True)
 
-        # Scrollbar
         self.scroll_y = ttk.Scrollbar(self.tabla_frame, orient="vertical", command=self.tabla_resultados.yview)
         self.scroll_y.pack(side="right", fill="y")
         self.tabla_resultados.configure(yscrollcommand=self.scroll_y.set)
 
-        self.root.mainloop()  # Ejecutar la ventana aquí
+        self.root.mainloop()  
 
     def calcular(self):
         try:
-            # Obtener y validar los valores
             x0 = float(self.entries["x0:"].get())
             y0 = float(self.entries["y0:"].get())
             h = float(self.entries["h:"].get())
@@ -71,14 +75,11 @@ class VentanaEuler:
                 messagebox.showerror("Error", "x0 debe ser menor que xf.")
                 return
 
-            # Calcular los resultados usando Euler Mejorado
             resultados = Metodos.euler_mejorado(x0, y0, h, xf, fxy)
 
-            # Limpiar la tabla
             for row in self.tabla_resultados.get_children():
                 self.tabla_resultados.delete(row)
 
-            # Insertar datos en la tabla
             for resultado in resultados:
                 self.tabla_resultados.insert("", "end", values=(resultado["n"], resultado["Xn"], resultado["Yn"], resultado["(Yn+1)*"], resultado["Xn+1"], resultado["Yn+1"]))
 
@@ -88,7 +89,6 @@ class VentanaEuler:
             messagebox.showerror("Error", f"Ocurrió un error: {str(e)}")
     
     def limpiar_entradas(self):
-        # Limpiar todos los campos de entrada
         for key, entry in self.entries.items():
             entry.delete(0, tk.END)
 

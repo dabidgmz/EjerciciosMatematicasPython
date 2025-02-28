@@ -11,7 +11,7 @@ class Menu:
         self.root.configure(bg="#1E1E1E") 
 
         label = tk.Label(self.root, text="Menú de Métodos Numéricos", font=("Arial", 18, "bold"), 
-                         bg="#1E1E1E", fg="#A97DFF")  # Texto en morado claro
+                         bg="#1E1E1E", fg="#A97DFF")  
         label.pack(pady=20)
 
         self.crear_boton("Euler Mejorado", self.abrir_euler_mejorado, "#6A0DAD", "#A97DFF")
@@ -23,8 +23,8 @@ class Menu:
                         activebackground=color_hover, activeforeground="black", bd=0, padx=10, pady=10,
                         width=25, relief="flat", cursor="hand2", borderwidth=5)
         btn.pack(pady=12)
-        btn.bind("<Enter>", lambda e: btn.config(bg=color_hover))  # Efecto hover
-        btn.bind("<Leave>", lambda e: btn.config(bg=color_base))  # Regresar color base
+        btn.bind("<Enter>", lambda e: btn.config(bg=color_hover))  
+        btn.bind("<Leave>", lambda e: btn.config(bg=color_base))  
         btn.config(command=comando)
 
     def abrir_euler_mejorado(self):      

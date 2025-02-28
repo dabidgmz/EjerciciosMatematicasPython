@@ -63,7 +63,7 @@ class VentanaRunge:
                 self.tabla_resultados.insert("", "end", values=(resultado["n"], resultado["Xn"], resultado["Yn"], resultado["K1"], resultado["K2"],resultado["K3"],resultado["K4"], resultado["Yn+1"]))
     
     def limpiar_entradas(self):
-        # Limpiar todos los campos de entrada
+        
         for key, entry in self.entries.items():
             entry.delete(0, tk.END)
 
