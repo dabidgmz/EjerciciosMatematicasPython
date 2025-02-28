@@ -28,6 +28,9 @@ class Runge:
         self.boton_limpiar = tk.Button(self.frame_entrada, text="Clean", font=("Arial", 10, "bold"), bg="#FF0000", fg="black", command=self.limpiar_entradas)
         self.boton_limpiar.grid(row=1, column=2, columnspan=1, pady=10)
 
+        self.boton_limpiar = tk.Button(self.frame_entrada, text="menu", font=("Arial", 10, "bold"), bg="#FF0000", fg="black", command=self.volver_menu_principal)
+        self.boton_limpiar.grid(row=1, column=3, columnspan=1, pady=10)
+
         self.frame_resultados = tk.LabelFrame(self.root, text="Resultados", padx=10, pady=10, bg="black", fg="purple")
         self.frame_resultados.pack(padx=10, pady=5, fill="both", expand=True)
 
@@ -80,3 +83,10 @@ class Runge:
             self.tabla_resultados.delete(row)
         
         self.entries["x0:"].focus()
+
+    def volver_menu_principal(self):        
+        self.root.withdraw()
+        self.root.quit()  
+        import menu  
+        menu_app = menu.Menu()  
+        menu_app.run()

@@ -39,6 +39,9 @@ class Euler:
         self.boton_limpiar = tk.Button(self.root, text="Clean", font=("Arial", 10, "bold"), bg=self.color_boton_limpiar, fg=self.color_boton_texto, command=self.limpiar_entradas)
         self.boton_limpiar.pack(pady=5)
 
+        self.boton_limpiar = tk.Button(self.root, text="Menu", font=("Arial", 10, "bold"), bg=self.color_boton_limpiar, fg=self.color_boton_texto, command=self.volver_menu_principal)
+        self.boton_limpiar.pack(pady=5)
+
         self.frame_resultados = tk.LabelFrame(self.root, text="Resultados", padx=10, pady=10, bg=self.color_fondo, fg=self.color_texto)
         self.frame_resultados.pack(padx=10, pady=5, fill="both", expand=True)
 
@@ -97,3 +100,9 @@ class Euler:
         
         self.entries["x0:"].focus()
 
+    def volver_menu_principal(self):        
+            self.root.withdraw()
+            self.root.quit()  
+            import menu  
+            menu_app = menu.Menu()  
+            menu_app.run()
