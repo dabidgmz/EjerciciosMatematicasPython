@@ -10,7 +10,8 @@ class Creditos:
         label.pack(pady=10)
 
         info = """
-        Nombre: 22170035
+        Matricula: 22170035
+        Nombre: David Gomez Herrera
         Carrera: ING. en Desarrollo y Gestión de Software
         Turno: Nocturno
         Grupo: 8º "C"
