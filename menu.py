@@ -3,6 +3,7 @@ from euler import Euler
 from newton import Newton
 from runge import Runge
 from creditos import Creditos
+from Instrucciones import Instrucciones
 class Menu:
     def __init__(self):
         self.root = tk.Tk()
@@ -18,6 +19,7 @@ class Menu:
         self.crear_boton("Runge Kutta", self.abrir_runge_kulta, "#6A0DAD", "#A97DFF")
         self.crear_boton("Newton Raphson", self.abrir_newton_raphson, "#6A0DAD", "#A97DFF")
         self.crear_boton("Créditos", self.abrir_creditos, "#6A0DAD", "#A97DFF")
+        self.crear_boton("Instrucciones", self.abrir_instrucciones, "#6A0DAD", "#A97DFF")
 
     def crear_boton(self, texto, comando, color_base, color_hover):
         btn = tk.Button(self.root, text=texto, font=("Arial", 14, "bold"), bg=color_base, fg="black",
@@ -43,6 +45,10 @@ class Menu:
     def abrir_creditos(self):
         self.root.destroy()
         Creditos()
+
+    def abrir_instrucciones(self):
+        self.root.destroy()
+        Instrucciones()
 
     def run(self):
         self.root.mainloop()

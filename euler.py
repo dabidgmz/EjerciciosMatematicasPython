@@ -24,6 +24,17 @@ class Euler:
 
         self.frame_entrada = tk.LabelFrame(self.root, text="Insertar datos ", padx=10, pady=10, bg=self.color_fondo, fg=self.color_texto)
         self.frame_entrada.pack(padx=10, pady=5, fill="x")
+        self.label_descripcion = tk.Label(
+            self.root, 
+            text="x0: Valor inicial de x | y0: Valor inicial de y | h: Tamaño del paso | "
+                "xf: Valor final de x | f(x, y): Función diferencial",
+            font=("Arial", 9), 
+            bg=self.color_fondo, 
+            fg=self.color_texto,
+            wraplength=700, 
+            justify="left"
+        )
+        self.label_descripcion.pack(padx=10, pady=5)
         labels = ["x0:", "y0:", "h:", "xf:", "f(x, y):"]
         self.entries = {}
 
@@ -32,6 +43,8 @@ class Euler:
             entry = tk.Entry(self.frame_entrada, font=("Arial", 10), width=10, bg=self.color_entrada, fg=self.color_entrada_texto, insertbackground=self.color_texto)
             entry.pack(side="left", padx=5)
             self.entries[label] = entry
+
+
 
         self.boton_calcular = tk.Button(self.root, text="=", font=("Arial", 10, "bold"), bg=self.color_boton_calcular, fg=self.color_boton_texto, command=self.calcular)
         self.boton_calcular.pack(pady=5)
