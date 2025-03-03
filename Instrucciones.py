@@ -24,6 +24,16 @@ class Instrucciones:
         scrollbar.config(command=self.texto_info.yview)
 
         info = """
+        !Atencion para iniciar el proyecto debes tener isntalado
+         pip install sympy
+         pip install matplotlib
+         pip install tkinter
+
+        ➤ Calculadora Matemática:
+        despues de decomprimir el folder EjericiosMatematicosPython
+        debe ejecutar el archivo main.py para iniciar la aplicacion
+        y mostrar la interfaz grafica del menu
+        
         ➤ Euler Mejorado:
           - x0: Valor inicial de x
           - y0: Valor inicial de y
